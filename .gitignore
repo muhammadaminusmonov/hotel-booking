@@ -1,2 +1,4 @@
-__pycache__
-.playwright-mcp
+.venv/
+__pycache__/
+.playwright-mcp/
+.DS_Store

@@ -5,7 +5,10 @@ The first six were written on the P03 code and still pass after the P04 refactor
 import unittest
 from datetime import date
 
-from hotel_booking import BookingService, DateRange, Guest, InMemoryReservationStore, Room, SmsNotificationSender
+from hotel_booking.notifications.internal import SmsNotificationSender
+from hotel_booking.reservations import BookingService, DateRange, Guest
+from hotel_booking.reservations.internal import InMemoryReservationStore
+from hotel_booking.rooms import Room
 
 R7 = Room("R7", "Standard")
 R8 = Room("R8", "Deluxe")
@@ -25,10 +28,10 @@ class FakeNotificationSender:
         self.fail = fail
         self.sent: list[str] = []
 
-    def send_confirmation(self, reservation) -> None:
+    def send_confirmation(self, confirmation) -> None:
         if self.fail:
             raise RuntimeError("The mail server is down.")
-        self.sent.append(reservation.id)
+        self.sent.append(confirmation.reservation_id)
 
 
 def new_service(failing_sender: bool = False):

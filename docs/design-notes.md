@@ -41,3 +41,34 @@ Must stay the same:
 - Tests: 6 passed after the refactoring (`python3 -m unittest -v` → Ran 6 tests, OK); 8 passed after Step 7.
 - Demo: the same nine lines as in P03, line by line (`python3 main.py`).
 - Race: still double-booked (`python3 main.py --race` → Maya: Accepted R101, Omar: Accepted R102, 2 Confirmed reservations, "Double booking!").
+
+# P06 design notes
+
+## Before
+- Tests: 8 passed (`python3 -m unittest` → Ran 8 tests, OK).
+- Demo: the nine expected lines, from "Free rooms 12-14 Nov: R7, R8" to "Confirmation emails sent: 2".
+- Race: still double-booked (Maya: Accepted R101, Omar: Accepted R102, 2 Confirmed reservations, "Double booking!").
+
+## Modules
+
+| Module | Public contract (others may use) | Internal code (only the module, the wiring and the tests) |
+|---|---|---|
+| Rooms | Room, the room catalog promise (`RoomCatalog`) | `InMemoryRoomCatalog` |
+| Reservations | BookingService, BookingResult, Reservation, DateRange, Guest, ReservationStatus, the store promise (`ReservationStore`) | `InMemoryReservationStore` |
+| Payments | PaymentStatus, the payment service promise (`PaymentService`) | `SimulatedPaymentService` |
+| Notifications | Confirmation, the notification sender promise (`NotificationSender`) | `EmailNotificationSender`, `SmsNotificationSender` |
+
+## Architecture rules
+1. Reservations uses only the public contracts of other modules: BookingService may use the Notifications contract, never the email sender. Notifications can change how it sends without touching booking.
+2. Rooms does not depend on any other module: Rooms knows nothing about reservations, money or messages. It is the base everything else builds on.
+3. Payments and Notifications do not depend on Reservations: the arrows point one way, from Reservations outwards, so there is never a dependency circle.
+
+Checked by import-linter (`pyproject.toml`), run with `.venv/bin/lint-imports`.
+
+## Broken on purpose
+Rule 1 failed ("Reservations uses only the public contracts of other modules"). The message named `hotel_booking.reservations.booking -> hotel_booking.notifications.internal (l.8)`, which is BookingService's file importing EmailNotificationSender. The 8 normal tests still passed, so only the border check caught it. After removing the line: 3 kept, 0 broken.
+
+## After
+- Tests: 8 passed, plus 3 border contracts kept (11 green) — same 8 tests as Before.
+- Demo: the same nine lines as Before (compared line by line).
+- Race: still double-booked, as Before ("Double booking!"); P09 fixes it.

@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" pages="7">
+<mxfile host="app.diagrams.net" pages="8">
   <diagram name="Use cases" id="pVvNaqrOd5AbMXa4MNrV">
     <mxGraphModel dx="964" dy="675" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -537,6 +537,44 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="CM-7" value="Announces: ReservationConfirmed" style="rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;dashed=1;dashPattern=2 4;strokeColor=#2e7d32;fontColor=#2e7d32;labelBackgroundColor=default;" edge="1" parent="1" source="CM-3" target="CM-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Modules" id="MD-page">
+    <mxGraphModel dx="1000" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MD-1" value="&lt;b&gt;Reservations&lt;/b&gt;&lt;br&gt;BookingService and the booking rule.&lt;br&gt;Uses only public contracts." style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="250" width="260" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="MD-2" value="&lt;b&gt;Rooms contract&lt;/b&gt;&lt;br&gt;RoomCatalog, Room" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="40" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="MD-3" value="&lt;b&gt;Payments contract&lt;/b&gt;&lt;br&gt;PaymentService" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="160" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="MD-4" value="&lt;b&gt;Notifications contract&lt;/b&gt;&lt;br&gt;NotificationSender,&lt;br&gt;Confirmation" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="290" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="MD-5" value="&lt;b&gt;Notifications internal&lt;/b&gt;&lt;br&gt;EmailNotificationSender" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="480" y="480" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="MD-6" value="Uses" style="rounded=0;html=1;dashed=1;endArrow=open;endFill=0;labelBackgroundColor=default;" edge="1" parent="1" source="MD-1" target="MD-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MD-7" value="Uses" style="rounded=0;html=1;dashed=1;endArrow=open;endFill=0;labelBackgroundColor=default;" edge="1" parent="1" source="MD-1" target="MD-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MD-8" value="Uses" style="rounded=0;html=1;dashed=1;endArrow=open;endFill=0;labelBackgroundColor=default;" edge="1" parent="1" source="MD-1" target="MD-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MD-9" value="Implements" style="rounded=0;html=1;dashed=1;endArrow=block;endFill=0;endSize=12;labelBackgroundColor=default;" edge="1" parent="1" source="MD-5" target="MD-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MD-10" value="Forbidden: names&lt;br&gt;EmailNotificationSender directly" style="rounded=0;html=1;strokeColor=#d32f2f;strokeWidth=2;endArrow=block;endFill=1;fontColor=#d32f2f;labelBackgroundColor=default;" edge="1" parent="1" source="MD-1" target="MD-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
